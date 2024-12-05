@@ -48,7 +48,9 @@ class LoginViewBody extends StatelessWidget {
                 height: 30,
               ),
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, kCategoriesView);
+                },
                 title: "LOGIN",
               ),
               const SizedBox(
