@@ -11,25 +11,12 @@ class CustomAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Hello,",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 22,
-                color: Colors.grey,
-              ),
-            ),
-            Text(
-              "Abdulrahman",
-              style: TextStyle(
-                fontSize: 28,
-                color: Colors.white,
-              ),
-            ),
-          ],
+        const Text(
+          "Abdulrahman",
+          style: TextStyle(
+            fontSize: 28,
+            color: Colors.white,
+          ),
         ),
         IconButton(
           onPressed: () {},

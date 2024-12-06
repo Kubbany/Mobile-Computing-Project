@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/home/presentation/views/categories_view.dart';
+import 'package:ecommerce_app/features/login&register/presentation/views/register_view.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_button.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -44,17 +45,40 @@ class LoginViewBody extends StatelessWidget {
                 labelText: "Password",
                 isPasswordField: true,
               ),
-              const SizedBox(
-                height: 30,
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
               ),
               CustomButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, kCategoriesView);
+                  Navigator.pushNamed(context, CategoriesView.id);
                 },
                 title: "LOGIN",
               ),
               const SizedBox(
-                height: 25,
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Checkbox(value: false, onChanged: (value) {}),
+                  const Text(
+                    "Remember Me",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +92,7 @@ class LoginViewBody extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, kRegisterView);
+                      Navigator.pushNamed(context, RegisterView.id);
                     },
                     child: const Text(
                       "REGISTER",

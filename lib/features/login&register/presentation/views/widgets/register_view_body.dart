@@ -1,11 +1,11 @@
-import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/login&register/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_button.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterViewBody extends StatelessWidget {
   const RegisterViewBody({super.key});
-  static const String id = kRegisterView;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -75,7 +75,7 @@ class RegisterViewBody extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, kLoginView);
+                      Navigator.pushNamed(context, LoginView.id);
                     },
                     child: const Text(
                       "LOGIN",
