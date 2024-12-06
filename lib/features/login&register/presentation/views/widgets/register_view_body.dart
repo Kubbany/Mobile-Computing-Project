@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/features/login&register/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_button.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_text_field.dart';
+import 'package:ecommerce_app/features/login&register/presentation/views/widgets/date_of_birth_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterViewBody extends StatelessWidget {
@@ -23,7 +24,7 @@ class RegisterViewBody extends StatelessWidget {
                 child: Image.asset("assets/images/ecommerce.png"),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               const Align(
                 alignment: Alignment.centerLeft,
@@ -53,6 +54,7 @@ class RegisterViewBody extends StatelessWidget {
                 labelText: "Confirm Password",
                 isPasswordField: true,
               ),
+              const DateOfBirthField(),
               const SizedBox(
                 height: 30,
               ),
@@ -61,7 +63,7 @@ class RegisterViewBody extends StatelessWidget {
                 title: "REGISTER",
               ),
               const SizedBox(
-                height: 25,
+                height: 15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
