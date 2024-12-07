@@ -62,33 +62,46 @@ class ProductDetailsViewBody extends StatelessWidget {
                   title: "Add To Cart",
                 ),
                 const SizedBox(
-                  height: 35,
+                  height: 25,
                 ),
                 TextField(
                   decoration: InputDecoration(
                     hintText: "Leave Your Feedback",
                     contentPadding: const EdgeInsetsDirectional.symmetric(
-                      vertical: 60,
+                      vertical: 40,
                       horizontal: 15,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: const BorderSide(
-                        color: Colors.blue,
-                      ),
+                    enabledBorder: buildBorder(),
+                    focusedBorder: buildBorder(
+                      color: Colors.blue,
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: buildBorder(),
+                    focusedBorder: buildBorder(
+                      color: Colors.blue,
+                    ),
+                    hintText: "Leave Your Rating",
+                  ),
+                )
               ],
             ),
           )
         ],
+      ),
+    );
+  }
+
+  OutlineInputBorder buildBorder({Color? color}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        color: color ?? Colors.grey,
       ),
     );
   }

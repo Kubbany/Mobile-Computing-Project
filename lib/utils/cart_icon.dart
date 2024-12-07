@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/cart/presentation/views/cart_view.dart';
 import 'package:flutter/material.dart';
 
 class CartIcon extends StatelessWidget {
@@ -9,7 +10,9 @@ class CartIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, CartView.id);
+      },
       icon: Container(
         width: 65,
         height: 65,

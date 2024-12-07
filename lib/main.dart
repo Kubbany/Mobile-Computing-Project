@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/cart/presentation/views/cart_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/categories_view.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/register_view.dart';
@@ -29,6 +30,7 @@ class EcommerceApp extends StatelessWidget {
         kLoginView: (context) => const LoginView(),
         kRegisterView: (context) => const RegisterView(),
         kCategoriesView: (context) => const CategoriesView(),
+        kCartView: (context) => const CartView(),
       },
     );
   }
