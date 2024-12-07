@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_button.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsViewBody extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/constants.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_view_body.dart';
-import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_button.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class CartView extends StatelessWidget {

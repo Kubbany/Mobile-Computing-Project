@@ -1,8 +1,8 @@
 import 'package:ecommerce_app/constants.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/cart_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/categories_view.dart';
-import 'package:ecommerce_app/features/login&register/presentation/views/login_view.dart';
-import 'package:ecommerce_app/features/login&register/presentation/views/register_view.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/login_view.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';

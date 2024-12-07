@@ -1,11 +1,11 @@
-import 'package:ecommerce_app/features/login&register/presentation/views/login_view.dart';
-import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_button.dart';
-import 'package:ecommerce_app/features/login&register/presentation/views/widgets/custom_text_field.dart';
-import 'package:ecommerce_app/features/login&register/presentation/views/widgets/date_of_birth_field.dart';
+import 'package:ecommerce_app/features/home/presentation/views/categories_view.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/register_view.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_button.dart';
+import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
-class RegisterViewBody extends StatelessWidget {
-  const RegisterViewBody({super.key});
+class LoginViewBody extends StatelessWidget {
+  const LoginViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,12 @@ class RegisterViewBody extends StatelessWidget {
                 child: Image.asset("assets/images/ecommerce.png"),
               ),
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "REGISTER",
+                  "LOGIN",
                   style: TextStyle(
                     fontSize: 28,
                     color: Colors.white,
@@ -41,35 +41,50 @@ class RegisterViewBody extends StatelessWidget {
                 labelText: "Email",
               ),
               const CustomTextField(
-                prefixIcon: Icons.person,
-                labelText: "Username",
-              ),
-              const CustomTextField(
                 prefixIcon: Icons.lock_rounded,
                 labelText: "Password",
                 isPasswordField: true,
               ),
-              const CustomTextField(
-                prefixIcon: Icons.lock_rounded,
-                labelText: "Confirm Password",
-                isPasswordField: true,
-              ),
-              const DateOfBirthField(),
-              const SizedBox(
-                height: 30,
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
               ),
               CustomButton(
-                onPressed: () {},
-                title: "REGISTER",
+                onPressed: () {
+                  Navigator.pushNamed(context, CategoriesView.id);
+                },
+                title: "LOGIN",
               ),
               const SizedBox(
                 height: 15,
               ),
               Row(
+                children: [
+                  Checkbox(value: false, onChanged: (value) {}),
+                  const Text(
+                    "Remember Me",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Already Have An Account?",
+                    "Don't Have An Account?",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
@@ -77,12 +92,13 @@ class RegisterViewBody extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, LoginView.id);
+                      Navigator.pushNamed(context, RegisterView.id);
                     },
                     child: const Text(
-                      "LOGIN",
+                      "REGISTER",
                       style: TextStyle(
                         fontSize: 20,
+                        //fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
                     ),
