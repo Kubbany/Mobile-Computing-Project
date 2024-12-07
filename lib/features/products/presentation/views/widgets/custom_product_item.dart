@@ -1,4 +1,6 @@
 import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/products/presentation/views/product_details_view.dart';
+import 'package:ecommerce_app/features/products/presentation/views/widgets/custom_item_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomProductItem extends StatelessWidget {
@@ -9,7 +11,14 @@ class CustomProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProductDetailsView(),
+          ),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.only(
           top: 20,
@@ -18,30 +27,15 @@ class CustomProductItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: kPrimaryColor,
         ),
-        child: Row(
+        child: const Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
+              padding: EdgeInsets.only(
                 right: 15,
               ),
-              child: SizedBox(
-                width: 100,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    bottomLeft: Radius.circular(12),
-                  ),
-                  child: AspectRatio(
-                    aspectRatio: 0.8,
-                    child: Image.asset(
-                      "assets/images/laptops.jpg",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
+              child: CustomItemImage(image: "assets/images/laptops.jpg"),
             ),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
