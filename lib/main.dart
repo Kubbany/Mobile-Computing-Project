@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/constants.dart';
 import 'package:ecommerce_app/features/home/presentation/views/categories_view.dart';
-import 'package:ecommerce_app/features/home/presentation/views/products_view.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/login&register/presentation/views/register_view.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,6 @@ class EcommerceApp extends StatelessWidget {
         kLoginView: (context) => const LoginView(),
         kRegisterView: (context) => const RegisterView(),
         kCategoriesView: (context) => const CategoriesView(),
-        kProductsView: (context) => const ProductsView(),
       },
     );
   }

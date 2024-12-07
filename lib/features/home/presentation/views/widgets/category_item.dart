@@ -11,7 +11,7 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(
-        bottom: 30,
+        bottom: 25,
       ),
       decoration: BoxDecoration(
         color: const Color(0xff242328),
@@ -38,7 +38,7 @@ class CategoryItem extends StatelessWidget {
             item.categoryName,
             style: const TextStyle(
               fontSize: 22,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

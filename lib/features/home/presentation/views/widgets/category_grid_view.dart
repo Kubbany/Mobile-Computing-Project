@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/features/home/data/models/category_item_model.dart';
-import 'package:ecommerce_app/features/home/presentation/views/products_view.dart';
+import 'package:ecommerce_app/features/products/presentation/views/products_view.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/category_item.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +27,14 @@ class CategoryGridView extends StatelessWidget {
       ),
       itemBuilder: (context, index) => GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, ProductsView.id);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductsView(
+                categoryName: items[index].categoryName,
+              ),
+            ),
+          );
         },
         child: CategoryItem(
           item: items[index],

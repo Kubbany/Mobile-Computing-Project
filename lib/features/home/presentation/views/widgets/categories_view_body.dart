@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/features/home/presentation/views/widgets/category_grid_view.dart';
-import 'package:ecommerce_app/features/home/presentation/views/widgets/custom_app_bar.dart';
-import 'package:ecommerce_app/features/home/presentation/views/widgets/custom_search_field.dart';
+import 'package:ecommerce_app/utils/custom_app_bar.dart';
+import 'package:ecommerce_app/utils/custom_search_field.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesViewBody extends StatelessWidget {
