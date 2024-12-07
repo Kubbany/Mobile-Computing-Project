@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/auth/data/user_model.dart';
+import 'package:ecommerce_app/features/auth/data/models/user_model.dart';
 import 'package:ecommerce_app/utils/custom_exception.dart';
 import 'package:ecommerce_app/utils/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,15 +27,8 @@ class FirebaseAuthService extends AuthService {
       User? firebaseUser = userCredential.user;
 
       if (firebaseUser != null) {
-        String uid = firebaseUser.uid;
-
         // Prepare the user data
-        UserModel userModel = UserModel(
-          id: uid,
-          username: username,
-          email: email,
-          password: '',
-        );
+        UserModel userModel = UserModel.fromFirebase(firebaseUser);
 
         return userModel;
       } else {
@@ -50,7 +43,7 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<String> signIn(
+  Future<UserModel> signIn(
       {required String email, required String password}) async {
     try {
       // Sign in the user with Firebase Auth
@@ -61,7 +54,8 @@ class FirebaseAuthService extends AuthService {
       User? firebaseUser = userCredential.user;
 
       if (firebaseUser != null) {
-        return firebaseUser.uid;
+        UserModel userModel = UserModel.fromFirebase(firebaseUser);
+        return userModel;
       } else {
         throw FirebaseAuthException(
             code: 'ERROR_NULL_SIGNIN_USER', message: 'User Login Failed.');

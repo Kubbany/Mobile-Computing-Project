@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/auth/data/user_model.dart';
+import 'package:ecommerce_app/features/auth/data/models/user_model.dart';
 
 abstract class AuthService {
   Future<UserModel> signUp({
@@ -6,7 +6,7 @@ abstract class AuthService {
     required String password,
     required String username,
   });
-  Future<String> signIn({
+  Future<UserModel> signIn({
     required String email,
     required String password,
   });
