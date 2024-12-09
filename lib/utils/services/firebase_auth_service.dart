@@ -74,7 +74,7 @@ class FirebaseAuthService extends AuthService {
     if (e is FirebaseAuthException) {
       switch (e.code) {
         case 'weak-password':
-          return const CustomException('Password Too Week.');
+          return const CustomException('Password Too Weak.');
 
         case 'email-already-in-use':
           return const CustomException('Account Already Exists.');

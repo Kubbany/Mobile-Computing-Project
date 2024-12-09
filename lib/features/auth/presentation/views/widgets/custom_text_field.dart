@@ -7,10 +7,12 @@ class CustomTextField extends StatefulWidget {
     required this.prefixIcon,
     this.isPasswordField = false,
     this.keyboardType,
+    this.textEditingController,
   });
   final IconData prefixIcon;
   final String labelText;
   final bool isPasswordField;
+  final TextEditingController? textEditingController;
   final TextInputType? keyboardType;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -24,7 +26,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
       padding: const EdgeInsets.only(
         top: 25,
       ),
-      child: TextField(
+      child: TextFormField(
+        controller: widget.textEditingController,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "This Filed Cannot Be Empty";
+          }
+          return null;
+        },
         keyboardType: widget.keyboardType,
         obscureText: widget.isPasswordField ? !isVisible : false,
         decoration: InputDecoration(
@@ -32,8 +41,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
             vertical: 22,
           ),
           enabledBorder: buildBorder(),
+          errorBorder: buildBorder(color: Colors.red),
           focusedBorder: buildBorder(
             color: Colors.blue,
+          ),
+          focusedErrorBorder: buildBorder(
+            color: Colors.red,
           ),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(
