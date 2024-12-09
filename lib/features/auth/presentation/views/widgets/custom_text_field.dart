@@ -8,12 +8,14 @@ class CustomTextField extends StatefulWidget {
     this.isPasswordField = false,
     this.keyboardType,
     this.textEditingController,
+    this.validator,
   });
   final IconData prefixIcon;
   final String labelText;
   final bool isPasswordField;
   final TextEditingController? textEditingController;
   final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -28,12 +30,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       child: TextFormField(
         controller: widget.textEditingController,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "This Filed Cannot Be Empty";
-          }
-          return null;
-        },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: widget.validator ??
+            (value) {
+              if (value == null || value.isEmpty) {
+                return "This Filed Cannot Be Empty";
+              }
+              return null;
+            },
         keyboardType: widget.keyboardType,
         obscureText: widget.isPasswordField ? !isVisible : false,
         decoration: InputDecoration(

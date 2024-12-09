@@ -38,8 +38,15 @@ class _DateOfBirthFieldState extends State<DateOfBirthField> {
       padding: const EdgeInsets.only(
         top: 25,
       ),
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "This Field Cannot Be Empty";
+          }
+          return null;
+        },
         controller: _dobController,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         readOnly: true,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
@@ -58,6 +65,18 @@ class _DateOfBirthFieldState extends State<DateOfBirthField> {
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
               color: Colors.blue,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              color: Colors.red,
             ),
           ),
         ),
