@@ -12,7 +12,7 @@ class LoginCubit extends Cubit<LoginState> {
   final GlobalKey<FormState> formKey = GlobalKey();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
-
+  bool rememberMe = false;
   Future<void> login() async {
     if (formKey.currentState!.validate()) {
       emit(LoginLoading());
