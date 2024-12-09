@@ -3,7 +3,6 @@ import 'package:ecommerce_app/features/auth/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/widgets/date_of_birth_field.dart';
-import 'package:ecommerce_app/features/home/presentation/views/categories_view.dart';
 import 'package:ecommerce_app/utils/loading_overlay_blured.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +18,12 @@ class RegisterViewBody extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const CategoriesView(),
+              builder: (context) => const LoginView(),
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Account Created Successfuly"),
             ),
           );
         } else if (state is RegisterFailure) {

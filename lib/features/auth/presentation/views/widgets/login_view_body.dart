@@ -5,9 +5,11 @@ import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_te
 import 'package:ecommerce_app/features/auth/presentation/views/widgets/password_recovery_dialog.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/widgets/remember_me.dart';
 import 'package:ecommerce_app/features/home/presentation/views/categories_view.dart';
+import 'package:ecommerce_app/utils/get_it_setup.dart';
 import 'package:ecommerce_app/utils/loading_overlay_blured.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
@@ -17,6 +19,12 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
+          if (context.read<LoginCubit>().rememberMe) {
+            getIt<SharedPreferences>().setString(
+              "user_data",
+              state.userModel.toJson(),
+            );
+          }
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
