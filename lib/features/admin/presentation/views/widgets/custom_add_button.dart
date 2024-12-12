@@ -19,7 +19,7 @@ class CustomAddButton extends StatelessWidget {
           999,
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: const Icon(
         Icons.add,
         color: Colors.white,
