@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/admin/presentation/views/admin_view.dart';
 import 'package:ecommerce_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/register_view.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_button.dart';
@@ -19,18 +20,35 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
+          bool isAdmin =
+              context.read<LoginCubit>().email.text == "admin@gmail.com" &&
+                  context.read<LoginCubit>().password.text == "password";
           if (context.read<LoginCubit>().rememberMe) {
+            if (isAdmin) {
+              getIt<SharedPreferences>().setBool("admin", true);
+            }
             getIt<SharedPreferences>().setString(
               "user_data",
               state.userModel.toJson(),
             );
           }
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CategoriesView(),
-            ),
-          );
+          if (isAdmin) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AdminView(),
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CategoriesView(
+                  userModel: state.userModel,
+                ),
+              ),
+            );
+          }
         } else if (state is LoginFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
