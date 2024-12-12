@@ -23,7 +23,7 @@ class CategoryItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: AspectRatio(
               aspectRatio: 1,
-              child: Image.asset(
+              child: Image.network(
                 item.image,
                 fit: BoxFit.fill,
               ),

@@ -32,7 +32,7 @@ class LoadingOverlayBlured extends StatelessWidget {
           Positioned.fill(
             child: Container(
               decoration: const BoxDecoration(
-                color: Colors.black54,
+                color: Colors.transparent,
               ),
             ),
           ),

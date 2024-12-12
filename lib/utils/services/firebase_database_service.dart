@@ -14,10 +14,8 @@ class FirebaseDatabaseService implements DatabaseService {
   }
 
   @override
-  Future<List<Map<String, dynamic>>?> getData(String path) async {
-    QuerySnapshot<Map<String, dynamic>> data =
-        await firestore.collection(path).get();
-    return data.docs as List<Map<String, dynamic>>?;
+  Stream<QuerySnapshot<Map<String, dynamic>>> getData(String path) {
+    return firestore.collection(path).snapshots();
   }
 
   @override

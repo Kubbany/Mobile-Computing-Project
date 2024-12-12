@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/features/home/data/models/category_item_model.dart';
 import 'package:ecommerce_app/utils/errors/failure.dart';
@@ -8,18 +9,8 @@ class CategoriesRepo {
 
   CategoriesRepo({required this.databaseService});
 
-  Future<Either<Failure, List<CategoryItemModel>>> getAllCategories() async {
-    try {
-      final data = await databaseService.getData("categories");
-      return right(
-          data?.map((e) => CategoryItemModel.fromMap(e)).toList() ?? []);
-    } on Exception catch (e) {
-      return left(
-        ServerFailure(
-          e.toString(),
-        ),
-      );
-    }
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAllCategories() {
+    return databaseService.getData("categories");
   }
 
   Future<Either<Failure, bool>> addCategory(

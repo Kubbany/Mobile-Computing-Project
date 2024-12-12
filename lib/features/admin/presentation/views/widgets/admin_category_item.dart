@@ -23,7 +23,7 @@ class AdminCategoryItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: AspectRatio(
               aspectRatio: 1,
-              child: Image.asset(
+              child: Image.network(
                 item.image,
                 fit: BoxFit.fill,
               ),
@@ -37,6 +37,50 @@ class AdminCategoryItem extends StatelessWidget {
           Text(
             item.categoryName,
             style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DummyAdminCategoryItem extends StatelessWidget {
+  const DummyAdminCategoryItem({
+    super.key,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+        bottom: 25,
+      ),
+      decoration: BoxDecoration(
+        color: const Color(0xff242328),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Image.asset(
+                "assets/images/fashion.jpg",
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          const Expanded(
+            child: SizedBox(
+              height: 10,
+            ),
+          ),
+          const Text(
+            "daddadad",
+            style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w500,
             ),
