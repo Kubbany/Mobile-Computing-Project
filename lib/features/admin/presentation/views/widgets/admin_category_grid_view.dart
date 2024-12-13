@@ -13,8 +13,8 @@ class AdminCategoryGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: getIt<CategoriesRepo>().getAllCategories(),
-        builder: (context, data) {
-          if (data.connectionState == ConnectionState.waiting) {
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return Skeletonizer(
               child: GridView.builder(
                 itemCount: 6,
@@ -28,7 +28,7 @@ class AdminCategoryGridView extends StatelessWidget {
               ),
             );
           } else {
-            var items = data.data?.docs
+            var items = snapshot.data?.docs
                     .map(
                       (e) => CategoryItemModel.fromFirestoreDoc(
                         e,

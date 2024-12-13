@@ -1,10 +1,12 @@
-import 'package:ecommerce_app/features/products/presentation/views/widgets/products_list_view.dart';
-import 'package:ecommerce_app/utils/custom_app_bar.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/admin_products_list_view.dart';
+
 import 'package:ecommerce_app/utils/custom_search_field.dart';
 import 'package:flutter/material.dart';
 
-class ProductsViewBody extends StatelessWidget {
-  const ProductsViewBody({super.key, required this.categoryName});
+class AdminProductsViewBody extends StatelessWidget {
+  const AdminProductsViewBody(
+      {super.key, required this.categoryID, required this.categoryName});
+  final String categoryID;
   final String categoryName;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,13 @@ class ProductsViewBody extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomAppBar(),
+                  const Text(
+                    "Admin",
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                    ),
+                  ),
                   const SizedBox(
                     height: 25,
                   ),
@@ -38,7 +46,9 @@ class ProductsViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            const Expanded(child: ProductsListView()),
+            AdminProductsListView(
+              catID: categoryID,
+            ),
           ],
         ),
       ),

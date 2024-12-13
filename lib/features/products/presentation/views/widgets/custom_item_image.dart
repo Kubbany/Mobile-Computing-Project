@@ -17,7 +17,7 @@ class CustomItemImage extends StatelessWidget {
         ),
         child: AspectRatio(
           aspectRatio: 0.8,
-          child: Image.asset(
+          child: Image.network(
             image,
             fit: BoxFit.cover,
           ),

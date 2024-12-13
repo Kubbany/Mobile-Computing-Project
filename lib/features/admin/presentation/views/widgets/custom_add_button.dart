@@ -12,7 +12,7 @@ class CustomAddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      heroTag: "Add Category",
+      heroTag: heroTag,
       backgroundColor: Colors.blue.shade800,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(

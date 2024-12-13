@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {super.key, required this.hintText, required this.controller});
+  const CustomTextField({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    this.keyboardType,
+  });
   final String hintText;
   final TextEditingController controller;
+  final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: keyboardType != null
+          ? [FilteringTextInputFormatter.digitsOnly]
+          : null,
+      keyboardType: keyboardType,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       validator: (value) {

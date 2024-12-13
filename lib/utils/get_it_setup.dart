@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/features/admin/data/repos/categories_repo.dart';
+import 'package:ecommerce_app/features/admin/data/repos/products_repo.dart';
 import 'package:ecommerce_app/features/auth/data/repos/auth_repo_implement.dart';
 import 'package:ecommerce_app/utils/services/auth_service.dart';
 import 'package:ecommerce_app/utils/services/database_service.dart';
@@ -25,6 +26,11 @@ Future<void> getItSetup() async {
   );
   getIt.registerLazySingleton<CategoriesRepo>(
     () => CategoriesRepo(
+      databaseService: getIt<DatabaseService>(),
+    ),
+  );
+  getIt.registerLazySingleton<ProductsRepo>(
+    () => ProductsRepo(
       databaseService: getIt<DatabaseService>(),
     ),
   );

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_category_cubit/edit_category_cubit.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/admin_products_view.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/delete_alert.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/edit_category_buttom_sheet.dart';
 import 'package:ecommerce_app/features/home/data/models/category_item_model.dart';
@@ -14,7 +15,19 @@ class AdminCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return AdminProductsView(
+                categoryID: item.id,
+                categoryName: item.categoryName,
+              );
+            },
+          ),
+        );
+      },
       onDoubleTap: () {
         // Edit Logic
         showModalBottomSheet(
