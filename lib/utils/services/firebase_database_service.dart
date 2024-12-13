@@ -27,4 +27,10 @@ class FirebaseDatabaseService implements DatabaseService {
       return null;
     }
   }
+
+  @override
+  Future<void> editData(
+      String path, String id, Map<String, dynamic> data) async {
+    await firestore.collection(path).doc(id).update(data);
+  }
 }

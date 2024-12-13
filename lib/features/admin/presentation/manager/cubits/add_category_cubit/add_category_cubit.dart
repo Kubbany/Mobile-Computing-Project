@@ -17,7 +17,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
       emit(AddCategoryLoading());
       final result = await categoriesRepo.addCategory(
         CategoryItemModel(
-            image: imageURL.text, categoryName: categoryName.text),
+            image: imageURL.text, categoryName: categoryName.text, id: ''),
       );
       result.fold(
         (failure) {

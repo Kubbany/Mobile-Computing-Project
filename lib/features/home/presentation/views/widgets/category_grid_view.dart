@@ -32,8 +32,8 @@ class CategoryGridView extends StatelessWidget {
           } else {
             var items = data.data?.docs
                     .map(
-                      (e) => CategoryItemModel.fromMap(
-                        e.data(),
+                      (e) => CategoryItemModel.fromFirestoreDoc(
+                        e,
                       ),
                     )
                     .toList() ??

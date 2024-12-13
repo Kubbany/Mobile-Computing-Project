@@ -27,10 +27,24 @@ class CategoriesRepo {
     }
   }
 
-  Future<Either<Failure, bool>> deleteCategory(
+  Future<Either<Failure, bool>> deleteCategory(String id) async {
+    try {
+      await databaseService.deleteData("categories", id);
+      return right(true);
+    } on Exception catch (e) {
+      return left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<Either<Failure, bool>> editCategory(
       CategoryItemModel categoryItem) async {
     try {
-      await databaseService.deleteData("cateogires", categoryItem.id!);
+      await databaseService.editData(
+          "categories", categoryItem.id, categoryItem.toMap());
       return right(true);
     } on Exception catch (e) {
       return left(

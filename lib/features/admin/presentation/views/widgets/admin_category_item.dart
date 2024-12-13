@@ -1,5 +1,9 @@
+import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_category_cubit/edit_category_cubit.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/delete_alert.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/edit_category_buttom_sheet.dart';
 import 'package:ecommerce_app/features/home/data/models/category_item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdminCategoryItem extends StatelessWidget {
   const AdminCategoryItem({
@@ -9,39 +13,66 @@ class AdminCategoryItem extends StatelessWidget {
   final CategoryItemModel item;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        bottom: 25,
-      ),
-      decoration: BoxDecoration(
-        color: const Color(0xff242328),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: Image.network(
-                item.image,
-                fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {},
+      onDoubleTap: () {
+        // Edit Logic
+        showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (_) => BlocProvider.value(
+            value: context.read<EditCategoryCubit>()..init(item),
+            child: EditCategoryButtomSheet(
+              categoryItem: item,
+            ),
+          ),
+        );
+      },
+      onLongPress: () {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return BlocProvider.value(
+              value: context.read<EditCategoryCubit>(),
+              child: DeleteAlert(id: item.id),
+            );
+          },
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.only(
+          bottom: 25,
+        ),
+        decoration: BoxDecoration(
+          color: const Color(0xff242328),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Image.network(
+                  item.image,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-          ),
-          const Expanded(
-            child: SizedBox(
-              height: 10,
+            const Expanded(
+              child: SizedBox(
+                height: 10,
+              ),
             ),
-          ),
-          Text(
-            item.categoryName,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w500,
+            Text(
+              item.categoryName,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
