@@ -1,9 +1,10 @@
 import 'package:ecommerce_app/features/auth/presentation/views/widgets/custom_button.dart';
+import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsViewBody extends StatelessWidget {
-  const ProductDetailsViewBody({super.key});
-
+  const ProductDetailsViewBody({super.key, required this.item});
+  final ProductModel item;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -14,8 +15,8 @@ class ProductDetailsViewBody extends StatelessWidget {
               bottomLeft: Radius.circular(32),
               bottomRight: Radius.circular(32),
             ),
-            child: Image.asset(
-              "assets/images/watches.jpg",
+            child: Image.network(
+              item.image,
             ),
           ),
           Padding(
@@ -26,9 +27,9 @@ class ProductDetailsViewBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Rolex Watch",
-                  style: TextStyle(
+                Text(
+                  item.title,
+                  style: const TextStyle(
                     fontSize: 24,
                     color: Colors.white,
                   ),
@@ -36,9 +37,9 @@ class ProductDetailsViewBody extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "Consider This As A Title For Rolex Watch",
-                  style: TextStyle(
+                Text(
+                  item.subtitle,
+                  style: const TextStyle(
                     fontSize: 22,
                     color: Colors.grey,
                   ),
@@ -46,9 +47,9 @@ class ProductDetailsViewBody extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  "\$40,000",
-                  style: TextStyle(
+                Text(
+                  "\$${item.price}",
+                  style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

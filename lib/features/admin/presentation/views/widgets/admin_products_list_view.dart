@@ -1,8 +1,10 @@
 import 'package:ecommerce_app/features/admin/data/repos/products_repo.dart';
+import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_product_cubit/edit_product_cubit.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/custom_admin_product_item.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:ecommerce_app/utils/get_it_setup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class AdminProductsListView extends StatelessWidget {
@@ -30,10 +32,13 @@ class AdminProductsListView extends StatelessWidget {
                   return productItem.catID == catID;
                 }).toList() ??
                 [];
-            return SliverList.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) => CustomAdminProductItem(
-                item: items[index],
+            return BlocProvider(
+              create: (context) => EditProductCubit(getIt<ProductsRepo>()),
+              child: SliverList.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) => CustomAdminProductItem(
+                  item: items[index],
+                ),
               ),
             );
           }

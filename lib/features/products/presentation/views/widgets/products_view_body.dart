@@ -4,8 +4,10 @@ import 'package:ecommerce_app/utils/custom_search_field.dart';
 import 'package:flutter/material.dart';
 
 class ProductsViewBody extends StatelessWidget {
-  const ProductsViewBody({super.key, required this.categoryName});
+  const ProductsViewBody(
+      {super.key, required this.categoryName, required this.catID});
   final String categoryName;
+  final String catID;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,7 +40,11 @@ class ProductsViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            const Expanded(child: ProductsListView()),
+            Expanded(
+              child: ProductsListView(
+                catID: catID,
+              ),
+            ),
           ],
         ),
       ),

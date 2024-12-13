@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_category_cubit/edit_category_cubit.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/admin_products_view.dart';
-import 'package:ecommerce_app/features/admin/presentation/views/widgets/delete_alert.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/delete_category_alert.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/edit_category_buttom_sheet.dart';
 import 'package:ecommerce_app/features/home/data/models/category_item_model.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class AdminCategoryItem extends StatelessWidget {
           builder: (_) {
             return BlocProvider.value(
               value: context.read<EditCategoryCubit>(),
-              child: DeleteAlert(id: item.id),
+              child: DeleteCategoryAlert(id: item.id),
             );
           },
         );

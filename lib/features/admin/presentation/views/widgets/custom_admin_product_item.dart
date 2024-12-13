@@ -1,7 +1,11 @@
 import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_product_cubit/edit_product_cubit.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/delete_product_alert.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/edit_product_bottom_sheet.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:ecommerce_app/features/products/presentation/views/widgets/custom_item_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomAdminProductItem extends StatelessWidget {
   const CustomAdminProductItem({
@@ -12,7 +16,30 @@ class CustomAdminProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onDoubleTap: () {
+        // Edit Logic
+        showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (_) => BlocProvider.value(
+            value: context.read<EditProductCubit>()..init(item),
+            child: EditProductButtomSheet(
+              productItem: item,
+            ),
+          ),
+        );
+      },
+      onLongPress: () {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return BlocProvider.value(
+              value: context.read<EditProductCubit>(),
+              child: DeleteProductAlert(id: item.id),
+            );
+          },
+        );
+      },
       child: Container(
         margin: const EdgeInsets.only(
           top: 20,
@@ -99,7 +126,9 @@ class DummyAdminProductItem extends StatelessWidget {
               padding: EdgeInsets.only(
                 right: 15,
               ),
-              child: CustomItemImage(image: "assets/images/laptops.jpg"),
+              child: CustomItemImage(
+                image: "https://i.ibb.co/yVcPkLG/fashion.jpg",
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -2,6 +2,7 @@ import 'package:ecommerce_app/features/admin/data/repos/categories_repo.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/admin_category_item.dart';
 import 'package:ecommerce_app/features/home/data/models/category_item_model.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/category_item.dart';
+import 'package:ecommerce_app/features/products/presentation/views/products_view.dart';
 import 'package:ecommerce_app/utils/get_it_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -47,7 +48,17 @@ class CategoryGridView extends StatelessWidget {
                 mainAxisSpacing: 50,
               ),
               itemBuilder: (context, index) => GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductsView(
+                        categoryName: items[index].categoryName,
+                        catID: items[index].id,
+                      ),
+                    ),
+                  );
+                },
                 child: CategoryItem(
                   item: items[index],
                 ),

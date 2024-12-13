@@ -48,6 +48,9 @@ class EditProductCubit extends Cubit<EditProductState> {
   void init(ProductModel productItem) {
     imageURL.text = productItem.image;
     title.text = productItem.title;
+    subtitle.text = productItem.subtitle;
+    price.text = productItem.price;
+    stockQuantity.text = productItem.stockQuantity.toString();
   }
 
   Future<void> deleteProduct(String id) async {

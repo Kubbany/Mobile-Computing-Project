@@ -2,8 +2,8 @@ import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_ca
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DeleteAlert extends StatelessWidget {
-  const DeleteAlert({
+class DeleteCategoryAlert extends StatelessWidget {
+  const DeleteCategoryAlert({
     super.key,
     required this.id,
   });

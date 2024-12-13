@@ -1,16 +1,48 @@
+import 'package:ecommerce_app/features/admin/data/repos/products_repo.dart';
+import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_product_cubit/edit_product_cubit.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/custom_admin_product_item.dart';
+import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:ecommerce_app/features/products/presentation/views/widgets/custom_product_item.dart';
+import 'package:ecommerce_app/utils/get_it_setup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductsListView extends StatelessWidget {
   const ProductsListView({
     super.key,
+    required this.catID,
   });
-
+  final String catID;
   @override
   Widget build(BuildContext context) {
-    return SliverList.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) => const CustomProductItem(),
-    );
+    return StreamBuilder(
+        stream: getIt<ProductsRepo>().getCategoryProducts(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Skeletonizer.sliver(
+                child: SliverList.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) => const DummyAdminProductItem(),
+            ));
+          } else {
+            var items = snapshot.data?.docs
+                    .map((e) => ProductModel.fromFirestoreDoc(e))
+                    .toList()
+                    .where((productItem) {
+                  return productItem.catID == catID;
+                }).toList() ??
+                [];
+            return BlocProvider(
+              create: (context) => EditProductCubit(getIt<ProductsRepo>()),
+              child: SliverList.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) => CustomProductItem(
+                  item: items[index],
+                ),
+              ),
+            );
+          }
+        });
   }
 }

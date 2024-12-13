@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:ecommerce_app/features/products/presentation/views/product_details_view.dart';
 import 'package:ecommerce_app/features/products/presentation/views/widgets/custom_item_image.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,9 @@ import 'package:flutter/material.dart';
 class CustomProductItem extends StatelessWidget {
   const CustomProductItem({
     super.key,
+    required this.item,
   });
-
+  final ProductModel item;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,7 +17,9 @@ class CustomProductItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ProductDetailsView(),
+            builder: (context) => ProductDetailsView(
+              item: item,
+            ),
           ),
         );
       },
@@ -27,51 +31,51 @@ class CustomProductItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: kPrimaryColor,
         ),
-        child: const Row(
+        child: Row(
           children: [
             Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 right: 15,
               ),
-              child: CustomItemImage(image: "assets/images/laptops.jpg"),
+              child: CustomItemImage(image: item.image),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Text(
-                  "Just Laptop",
-                  style: TextStyle(
+                  item.title,
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "Just Title For Laptop Details",
+                  item.subtitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "\$40,000",
-                  style: TextStyle(
+                  "\$${item.price}",
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
               ],

@@ -3,13 +3,18 @@ import 'package:ecommerce_app/features/products/presentation/views/widgets/produ
 import 'package:flutter/material.dart';
 
 class ProductsView extends StatelessWidget {
-  const ProductsView({super.key, required this.categoryName});
+  const ProductsView(
+      {super.key, required this.categoryName, required this.catID});
   static const String id = kProductsView;
   final String categoryName;
+  final String catID;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ProductsViewBody(categoryName: categoryName),
+      body: ProductsViewBody(
+        categoryName: categoryName,
+        catID: catID,
+      ),
     );
   }
 }
