@@ -1,10 +1,12 @@
 import 'package:ecommerce_app/constants.dart';
+import 'package:ecommerce_app/features/cart/data/models/product_cart_model.dart';
+import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_quantity.dart';
 import 'package:ecommerce_app/features/products/presentation/views/widgets/custom_item_image.dart';
 import 'package:flutter/material.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key});
-
+  const CartItem({super.key, required this.productCartModel});
+  final ProductCartModel productCartModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,11 +19,11 @@ class CartItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(
+          Padding(
+            padding: const EdgeInsets.only(
               right: 15,
             ),
-            child: CustomItemImage(image: "assets/images/laptops.jpg"),
+            child: CustomItemImage(image: productCartModel.productModel.image),
           ),
           Expanded(
             child: Column(
@@ -30,9 +32,9 @@ class CartItem extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "Just Laptop",
-                  style: TextStyle(
+                Text(
+                  productCartModel.productModel.title,
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                   ),
@@ -40,11 +42,11 @@ class CartItem extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  "Just Title For Laptop Details",
+                Text(
+                  productCartModel.productModel.subtitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
@@ -55,40 +57,15 @@ class CartItem extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "\$40,000",
-                      style: TextStyle(
+                    Text(
+                      "\$${productCartModel.productModel.price}",
+                      style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.remove,
-                            size: 25,
-                          ),
-                        ),
-                        const Text(
-                          "1",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add,
-                            size: 25,
-                          ),
-                        ),
-                      ],
-                    )
+                    CartQuantity(productCartModel: productCartModel)
                   ],
                 ),
               ],
