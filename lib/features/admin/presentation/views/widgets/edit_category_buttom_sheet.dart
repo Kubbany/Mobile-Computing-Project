@@ -6,9 +6,22 @@ import 'package:ecommerce_app/utils/loading_overlay_blured.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EditCategoryButtomSheet extends StatelessWidget {
+class EditCategoryButtomSheet extends StatefulWidget {
   const EditCategoryButtomSheet({super.key, required this.categoryItem});
   final CategoryItemModel categoryItem;
+
+  @override
+  State<EditCategoryButtomSheet> createState() =>
+      _EditCategoryButtomSheetState();
+}
+
+class _EditCategoryButtomSheetState extends State<EditCategoryButtomSheet> {
+  @override
+  void initState() {
+    context.read<EditCategoryCubit>().init(widget.categoryItem);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -83,7 +96,7 @@ class EditCategoryButtomSheet extends StatelessWidget {
                       onPressed: () {
                         context
                             .read<EditCategoryCubit>()
-                            .editCategory(categoryItem);
+                            .editCategory(widget.categoryItem);
                       },
                       title: "Edit Category",
                     ),

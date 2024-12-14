@@ -4,21 +4,22 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
+    required this.username,
   });
-
+  final String username;
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "Abdulrahman",
-          style: TextStyle(
+          username,
+          style: const TextStyle(
             fontSize: 28,
             color: Colors.white,
           ),
         ),
-        CartIcon(),
+        const CartIcon(),
       ],
     );
   }

@@ -6,9 +6,21 @@ import 'package:ecommerce_app/utils/loading_overlay_blured.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EditProductButtomSheet extends StatelessWidget {
+class EditProductButtomSheet extends StatefulWidget {
   const EditProductButtomSheet({super.key, required this.productItem});
   final ProductModel productItem;
+
+  @override
+  State<EditProductButtomSheet> createState() => _EditProductButtomSheetState();
+}
+
+class _EditProductButtomSheetState extends State<EditProductButtomSheet> {
+  @override
+  void initState() {
+    context.read<EditProductCubit>().init(widget.productItem);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -106,7 +118,7 @@ class EditProductButtomSheet extends StatelessWidget {
                       onPressed: () {
                         context
                             .read<EditProductCubit>()
-                            .editProduct(productItem);
+                            .editProduct(widget.productItem);
                       },
                       title: "Edit Product",
                     ),

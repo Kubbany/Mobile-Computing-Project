@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/utils/services/database_service.dart';
 
@@ -32,5 +34,6 @@ class FirebaseDatabaseService implements DatabaseService {
   Future<void> editData(
       String path, String id, Map<String, dynamic> data) async {
     await firestore.collection(path).doc(id).update(data);
+    log("From Firebase Database: $id");
   }
 }

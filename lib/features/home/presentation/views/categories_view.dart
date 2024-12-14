@@ -15,7 +15,9 @@ class CategoriesView extends StatelessWidget {
         email: userModel.email,
         username: userModel.username,
       ),
-      body: const CategoriesViewBody(),
+      body: CategoriesViewBody(
+        username: userModel.username,
+      ),
     );
   }
 }

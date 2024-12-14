@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
@@ -43,6 +45,7 @@ class ProductsRepo {
     try {
       await databaseService.editData(
           "products", productItem.id, productItem.toMap());
+      log("From Repo: ${productItem.id} \n ${productItem.toMap().toString()}");
       return right(true);
     } on Exception catch (e) {
       return left(

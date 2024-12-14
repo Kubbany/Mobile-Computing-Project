@@ -12,6 +12,7 @@ class AdminCategoryItem extends StatelessWidget {
     required this.item,
   });
   final CategoryItemModel item;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -34,7 +35,7 @@ class AdminCategoryItem extends StatelessWidget {
           isScrollControlled: true,
           context: context,
           builder: (_) => BlocProvider.value(
-            value: context.read<EditCategoryCubit>()..init(item),
+            value: context.read<EditCategoryCubit>(),
             child: EditCategoryButtomSheet(
               categoryItem: item,
             ),

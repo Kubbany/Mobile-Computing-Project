@@ -22,7 +22,7 @@ class CustomAdminProductItem extends StatelessWidget {
           isScrollControlled: true,
           context: context,
           builder: (_) => BlocProvider.value(
-            value: context.read<EditProductCubit>()..init(item),
+            value: context.read<EditProductCubit>(),
             child: EditProductButtomSheet(
               productItem: item,
             ),

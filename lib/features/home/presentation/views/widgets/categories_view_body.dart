@@ -4,39 +4,43 @@ import 'package:ecommerce_app/utils/custom_search_field.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesViewBody extends StatelessWidget {
-  const CategoriesViewBody({super.key});
-
+  const CategoriesViewBody({super.key, required this.username});
+  final String username;
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 12,
           horizontal: 15,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomAppBar(),
-            SizedBox(
+            CustomAppBar(
+              username: username,
+            ),
+            const SizedBox(
               height: 25,
             ),
-            CustomSearchField(),
-            SizedBox(
+            const CustomSearchField(),
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "Categories",
               style: TextStyle(
                 fontSize: 28,
                 color: Colors.white,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Expanded(
-              child: CategoryGridView(),
+              child: CategoryGridView(
+                username: username,
+              ),
             ),
           ],
         ),

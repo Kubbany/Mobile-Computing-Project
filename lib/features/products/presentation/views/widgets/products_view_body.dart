@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 
 class ProductsViewBody extends StatelessWidget {
   const ProductsViewBody(
-      {super.key, required this.categoryName, required this.catID});
+      {super.key,
+      required this.categoryName,
+      required this.catID,
+      required this.username});
   final String categoryName;
   final String catID;
+  final String username;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +26,9 @@ class ProductsViewBody extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomAppBar(),
+                  CustomAppBar(
+                    username: username,
+                  ),
                   const SizedBox(
                     height: 25,
                   ),
@@ -40,10 +46,8 @@ class ProductsViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: ProductsListView(
-                catID: catID,
-              ),
+            ProductsListView(
+              catID: catID,
             ),
           ],
         ),

@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CategoryGridView extends StatelessWidget {
-  const CategoryGridView({super.key});
+  const CategoryGridView({super.key, required this.username});
+  final String username;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -53,6 +54,7 @@ class CategoryGridView extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ProductsView(
+                        username: username,
                         categoryName: items[index].categoryName,
                         catID: items[index].id,
                       ),
