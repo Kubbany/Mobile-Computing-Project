@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ecommerce_app/features/admin/data/repos/products_repo.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +29,6 @@ class EditProductCubit extends Cubit<EditProductState> {
         emit(EditProductFailure(errorMessage: "Same Data, No Changes!"));
         return;
       }
-      log("From Cubit: ${newProductItem.toString()} ");
       final result = await productsRepo.editProduct(
         newProductItem,
       );
