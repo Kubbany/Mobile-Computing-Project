@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/cart/data/models/cart_model.dart';
 import 'package:ecommerce_app/features/cart/data/models/product_cart_model.dart';
 import 'package:flutter/material.dart';
 
@@ -5,10 +6,13 @@ class CartQuantity extends StatefulWidget {
   const CartQuantity({
     super.key,
     required this.productCartModel,
+    required this.cartValue,
+    required this.index,
   });
 
   final ProductCartModel productCartModel;
-
+  final ValueNotifier<CartModel?> cartValue;
+  final int index;
   @override
   State<CartQuantity> createState() => _CartQuantityState();
 }
@@ -22,7 +26,12 @@ class _CartQuantityState extends State<CartQuantity> {
         IconButton(
           onPressed: () {
             if (widget.productCartModel.quantity > 0) {
+              List<ProductCartModel> products =
+                  widget.cartValue.value!.products;
               widget.productCartModel.quantity--;
+              products[widget.index].quantity--;
+              widget.cartValue.value =
+                  widget.cartValue.value!.copyWith(products: products);
               setState(() {});
             }
           },
@@ -44,7 +53,12 @@ class _CartQuantityState extends State<CartQuantity> {
           onPressed: () {
             if (widget.productCartModel.quantity <
                 widget.productCartModel.productModel.stockQuantity) {
+              List<ProductCartModel> products =
+                  widget.cartValue.value!.products;
               widget.productCartModel.quantity++;
+              products[widget.index].quantity++;
+              widget.cartValue.value =
+                  widget.cartValue.value!.copyWith(products: products);
               setState(() {});
             }
           },

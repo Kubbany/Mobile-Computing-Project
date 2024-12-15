@@ -1,20 +1,21 @@
+import 'package:ecommerce_app/features/cart/data/models/cart_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/widgets/cart_list_view.dart';
 import 'package:flutter/material.dart';
 
 class CartViewBody extends StatelessWidget {
-  const CartViewBody({super.key});
-
+  const CartViewBody({super.key, required this.cartValue});
+  final ValueNotifier<CartModel?> cartValue;
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 12,
           horizontal: 15,
         ),
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -31,7 +32,7 @@ class CartViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            CartListView(),
+            CartListView(cartValue: cartValue),
           ],
         ),
       ),

@@ -96,59 +96,10 @@ class ProductDetailsViewBody extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Leave Your Feedback",
-                    contentPadding: const EdgeInsetsDirectional.symmetric(
-                      vertical: 40,
-                      horizontal: 15,
-                    ),
-                    enabledBorder: buildBorder(),
-                    focusedBorder: buildBorder(
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    enabledBorder: buildBorder(),
-                    focusedBorder: buildBorder(
-                      color: Colors.blue,
-                    ),
-                    hintText: "Leave Your Rating",
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff1c4670),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        "Submit Feedback",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           )
         ],
-      ),
-    );
-  }
-
-  OutlineInputBorder buildBorder({Color? color}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        color: color ?? Colors.grey,
       ),
     );
   }
