@@ -81,6 +81,13 @@ class ProductButtomSheet extends StatelessWidget {
                           height: 25,
                         ),
                         CustomTextField(
+                          controller: context.read<AddProductCubit>().barcode,
+                          hintText: "Barcode",
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        CustomTextField(
                           keyboardType: TextInputType.number,
                           controller: context.read<AddProductCubit>().price,
                           hintText: "Product Price",

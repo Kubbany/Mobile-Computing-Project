@@ -9,20 +9,21 @@ class ProductModel {
   final String title;
   final String subtitle;
   final String price;
-  final int stockQuantity;
+  int stockQuantity;
   final String catID;
   int numOfSellings;
+  final String? barcode;
 
-  ProductModel({
-    required this.id,
-    required this.image,
-    required this.title,
-    required this.subtitle,
-    required this.price,
-    required this.stockQuantity,
-    required this.catID,
-    this.numOfSellings = 0,
-  });
+  ProductModel(
+      {required this.id,
+      required this.image,
+      required this.title,
+      required this.subtitle,
+      required this.price,
+      required this.stockQuantity,
+      required this.catID,
+      this.numOfSellings = 0,
+      this.barcode});
 
   ProductModel copyWith({
     String? id,
@@ -33,6 +34,7 @@ class ProductModel {
     int? stockQuantity,
     String? catID,
     int? numOfSellings,
+    String? barcode,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -43,6 +45,7 @@ class ProductModel {
       stockQuantity: stockQuantity ?? this.stockQuantity,
       catID: catID ?? this.catID,
       numOfSellings: numOfSellings ?? this.numOfSellings,
+      barcode: barcode ?? this.barcode,
     );
   }
 
@@ -55,6 +58,7 @@ class ProductModel {
       'stockQuantity': stockQuantity,
       'catID': catID,
       'numOfSellings': numOfSellings,
+      'barcode': barcode,
     };
   }
 
@@ -69,6 +73,7 @@ class ProductModel {
       stockQuantity: map['stockQuantity'] as int,
       catID: map['catID'] as String,
       numOfSellings: map['numOfSellings'] as int,
+      barcode: map['barcode'] as String?,
     );
   }
 
@@ -82,6 +87,7 @@ class ProductModel {
       stockQuantity: map['stockQuantity'] as int,
       catID: map['catID'] as String,
       numOfSellings: map['numOfSellings'] as int,
+      barcode: map['barcode'] as String?,
     );
   }
 
@@ -106,7 +112,8 @@ class ProductModel {
         other.price == price &&
         other.stockQuantity == stockQuantity &&
         other.catID == catID &&
-        other.numOfSellings == numOfSellings;
+        other.numOfSellings == numOfSellings &&
+        other.barcode == barcode;
   }
 
   @override
@@ -118,6 +125,7 @@ class ProductModel {
         price.hashCode ^
         stockQuantity.hashCode ^
         catID.hashCode ^
-        numOfSellings.hashCode;
+        numOfSellings.hashCode ^
+        barcode.hashCode;
   }
 }

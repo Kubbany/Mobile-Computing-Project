@@ -29,7 +29,6 @@ class _CartQuantityState extends State<CartQuantity> {
               List<ProductCartModel> products =
                   widget.cartValue.value!.products;
               widget.productCartModel.quantity--;
-              products[widget.index].quantity--;
               widget.cartValue.value =
                   widget.cartValue.value!.copyWith(products: products);
               setState(() {});
@@ -56,7 +55,6 @@ class _CartQuantityState extends State<CartQuantity> {
               List<ProductCartModel> products =
                   widget.cartValue.value!.products;
               widget.productCartModel.quantity++;
-              products[widget.index].quantity++;
               widget.cartValue.value =
                   widget.cartValue.value!.copyWith(products: products);
               setState(() {});

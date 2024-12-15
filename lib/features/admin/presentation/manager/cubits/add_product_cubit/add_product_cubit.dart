@@ -12,6 +12,7 @@ class AddProductCubit extends Cubit<AddProductState> {
   final TextEditingController imageURL = TextEditingController();
   final TextEditingController productName = TextEditingController();
   final TextEditingController subtitle = TextEditingController();
+  final TextEditingController barcode = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController stockQuantity = TextEditingController();
 
@@ -24,6 +25,7 @@ class AddProductCubit extends Cubit<AddProductState> {
           image: imageURL.text,
           title: productName.text,
           subtitle: subtitle.text,
+          barcode: barcode.text,
           price: price.text,
           stockQuantity: int.parse(stockQuantity.text),
           catID: catID,
@@ -47,6 +49,7 @@ class AddProductCubit extends Cubit<AddProductState> {
     imageURL.dispose();
     productName.dispose();
     subtitle.dispose();
+    barcode.dispose();
     price.dispose();
     stockQuantity.dispose();
     await super.close();

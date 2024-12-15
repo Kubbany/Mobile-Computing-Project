@@ -66,8 +66,9 @@ class ProductDetailsViewBody extends StatelessWidget {
                 ),
                 CustomButton(
                   onPressed: () {
-                    ProductCartModel productCartModel =
-                        ProductCartModel(productModel: item);
+                    ProductCartModel productCartModel = ProductCartModel(
+                      productModel: item,
+                    );
                     CartModel cartModel = CartModel(
                       userID: FirebaseAuth.instance.currentUser!.uid,
                       products: [productCartModel],

@@ -22,10 +22,19 @@ class _CartViewState extends State<CartView> {
         padding: const EdgeInsets.all(15),
         child: CustomButton(
           onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) => ConfirmOrder(cartValue: cartValue),
-            );
+            if (cartValue.value != null &&
+                cartValue.value!.products.isNotEmpty) {
+              showDialog(
+                context: context,
+                builder: (context) => ConfirmOrder(cartValue: cartValue),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Empty Cart"),
+                ),
+              );
+            }
           },
           title: "Submit Order",
         ),

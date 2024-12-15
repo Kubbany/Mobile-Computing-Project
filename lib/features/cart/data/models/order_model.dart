@@ -3,8 +3,8 @@ import 'package:ecommerce_app/features/cart/data/models/cart_model.dart';
 class OrderModel {
   final CartModel cartModel;
   DateTime? orderedAt = DateTime.now();
-  final String? feedback;
-  final int? rating;
+  String? feedback;
+  int? rating;
   double totalPrice = 0;
   OrderModel({
     required this.cartModel,
