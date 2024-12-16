@@ -98,7 +98,7 @@ class ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, image: $image, title: $title, subtitle: $subtitle, price: $price, stockQuantity: $stockQuantity, catID: $catID, numOfSellings: $numOfSellings)';
+    return 'ProductModel(id: $id, image: $image, title: $title, subtitle: $subtitle, price: $price, stockQuantity: $stockQuantity, catID: $catID, numOfSellings: $numOfSellings, barcode: $barcode)';
   }
 
   @override

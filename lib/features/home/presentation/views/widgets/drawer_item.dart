@@ -10,6 +10,9 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        drawerItemModel.onTap.call(context);
+      },
       leading: Icon(
         drawerItemModel.icon,
         size: 30,
