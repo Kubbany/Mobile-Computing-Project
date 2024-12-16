@@ -10,9 +10,7 @@ class ProductCartModel {
   ProductCartModel({
     required this.productModel,
     this.quantity = 0,
-  }) {
-    quantity = productModel.stockQuantity > 0 ? 1 : 0;
-  }
+  });
 
   ProductCartModel copyWith({
     ProductModel? productModel,

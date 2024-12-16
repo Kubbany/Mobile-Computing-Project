@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/admin/presentation/views/widgets/transaction_view_body.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/transaction_view_body.dart';
 import 'package:flutter/material.dart';
 
 class TransactionView extends StatelessWidget {

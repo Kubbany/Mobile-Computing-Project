@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/admin/presentation/views/best_selling_view.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/transaction_view.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/home/data/models/drawer_item_model.dart';
@@ -26,7 +27,14 @@ class AdminDrawer extends StatelessWidget {
     DrawerItemModel(
       icon: Icons.star,
       title: "Best Sellings",
-      onTap: (context) {},
+      onTap: (context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const BestSellingView(),
+          ),
+        );
+      },
     ),
     DrawerItemModel(
       icon: Icons.logout_outlined,
