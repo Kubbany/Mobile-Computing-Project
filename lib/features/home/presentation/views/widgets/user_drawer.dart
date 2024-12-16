@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/cart/presentation/views/cart_view.dart';
 import 'package:ecommerce_app/features/home/data/models/drawer_item_model.dart';
@@ -7,7 +6,6 @@ import 'package:ecommerce_app/features/home/presentation/views/widgets/user_info
 import 'package:ecommerce_app/utils/get_it_setup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDrawer extends StatelessWidget {
@@ -32,7 +30,6 @@ class UserDrawer extends StatelessWidget {
         onTap: (context) {
           FirebaseAuth.instance.signOut();
           getIt<SharedPreferences>().clear();
-          context.read<LoginCubit>().rememberMe = false;
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

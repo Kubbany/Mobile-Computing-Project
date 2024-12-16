@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/admin_products_list_view.dart';
-
-import 'package:ecommerce_app/utils/custom_search_field.dart';
+import 'package:ecommerce_app/features/admin/presentation/views/widgets/custom_admin_search_field.dart';
 import 'package:flutter/material.dart';
 
 class AdminProductsViewBody extends StatelessWidget {
@@ -32,7 +31,7 @@ class AdminProductsViewBody extends StatelessWidget {
                   const SizedBox(
                     height: 25,
                   ),
-                  const CustomSearchField(),
+                  const CustomAdminSearchField(),
                   const SizedBox(
                     height: 20,
                   ),
