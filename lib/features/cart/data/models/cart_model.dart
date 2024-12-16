@@ -42,6 +42,17 @@ class CartModel {
     );
   }
 
+  factory CartModel.fromMap2(Map<String, dynamic> map) {
+    return CartModel(
+      userID: map['userID'] as String,
+      products: List<ProductCartModel>.from(
+        (map['products'] as List).map<ProductCartModel>(
+          (x) => ProductCartModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+    );
+  }
+
   String toJson() => json.encode(toMap());
 
   factory CartModel.fromJson(String source) =>

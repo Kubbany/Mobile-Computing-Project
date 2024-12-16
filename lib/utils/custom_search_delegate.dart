@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/features/admin/data/repos/products_repo.dart';
+import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_product_cubit/edit_product_cubit.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:ecommerce_app/features/products/presentation/views/widgets/custom_product_item.dart';
+import 'package:ecommerce_app/utils/get_it_setup.dart';
+import 'package:ecommerce_app/utils/scan_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -17,15 +19,19 @@ class CustomSearchDelegate extends SearchDelegate {
     return snapshot.docs.map((e) => ProductModel.fromFirestoreDoc(e)).toList();
   }
 
-  Future<void> requestMicrophonePermission() async {
+  Future<void> requestMicrophonePermission(BuildContext context) async {
     var status = await Permission.microphone.request();
     if (!status.isGranted) {
-      throw Exception('Microphone permission is required.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Microphone Permission Required"),
+        ),
+      );
     }
   }
 
   Future<void> startVoiceSearch(BuildContext context) async {
-    await requestMicrophonePermission();
+    await requestMicrophonePermission(context);
 
     bool available = await speechToText.initialize();
     if (available) {
@@ -41,12 +47,27 @@ class CustomSearchDelegate extends SearchDelegate {
     }
   }
 
+  void startCameraScan(BuildContext context) {
+    Navigator.of(context)
+        .push(
+      MaterialPageRoute(
+        builder: (context) => const ScanView(),
+      ),
+    )
+        .then(
+      (value) {
+        if (value != null) {
+          query = value;
+        }
+      },
+    );
+  }
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
         onPressed: () {
-          log("Started");
           startVoiceSearch(context);
         },
         icon: const Icon(
@@ -55,7 +76,9 @@ class CustomSearchDelegate extends SearchDelegate {
         ),
       ),
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          startCameraScan(context);
+        },
         icon: const Icon(
           Icons.camera_alt_outlined,
           size: 30,
@@ -83,37 +106,45 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // Filter products based on query
-    return FutureBuilder<List<ProductModel>>(
-      future: fetchProducts(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No products found'));
-        } else {
-          final results = snapshot.data!
-              .where((product) => product.title
-                  .toString()
-                  .toLowerCase()
-                  .contains(query.toLowerCase()))
-              .toList();
+    return BlocProvider(
+      create: (context) => EditProductCubit(getIt<ProductsRepo>()),
+      child: FutureBuilder<List<ProductModel>>(
+        future: fetchProducts(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No products found'));
+          } else {
+            final results = snapshot.data!
+                .where(
+                  (product) =>
+                      product.title.toString().toLowerCase().contains(
+                            query.toLowerCase(),
+                          ) ||
+                      product.barcode.toString().toLowerCase().contains(
+                            query.toLowerCase(),
+                          ),
+                )
+                .toList();
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-            ),
-            child: ListView.builder(
-              itemCount: results.length,
-              itemBuilder: (context, index) {
-                final product = results[index];
-                return CustomProductItem(item: product);
-              },
-            ),
-          );
-        }
-      },
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
+              child: ListView.builder(
+                itemCount: results.length,
+                itemBuilder: (context, index) {
+                  final product = results[index];
+                  return CustomProductItem(item: product);
+                },
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 

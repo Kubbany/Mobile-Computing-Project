@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/admin/presentation/views/transaction_view.dart';
 import 'package:ecommerce_app/features/auth/presentation/views/login_view.dart';
 import 'package:ecommerce_app/features/home/data/models/drawer_item_model.dart';
 import 'package:ecommerce_app/features/home/presentation/views/widgets/drawer_item.dart';
@@ -13,7 +14,14 @@ class AdminDrawer extends StatelessWidget {
     DrawerItemModel(
       icon: Icons.credit_card,
       title: "Transactions",
-      onTap: (context) {},
+      onTap: (context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const TransactionView(),
+          ),
+        );
+      },
     ),
     DrawerItemModel(
       icon: Icons.star,

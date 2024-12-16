@@ -19,15 +19,19 @@ class CustomAdminSearchDelegate extends SearchDelegate {
     return snapshot.docs.map((e) => ProductModel.fromFirestoreDoc(e)).toList();
   }
 
-  Future<void> requestMicrophonePermission() async {
+  Future<void> requestMicrophonePermission(BuildContext context) async {
     var status = await Permission.microphone.request();
     if (!status.isGranted) {
-      throw Exception('Microphone permission is required.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Microphone Permission Required"),
+        ),
+      );
     }
   }
 
   Future<void> startVoiceSearch(BuildContext context) async {
-    await requestMicrophonePermission();
+    await requestMicrophonePermission(context);
 
     bool available = await speechToText.initialize();
     if (available) {
