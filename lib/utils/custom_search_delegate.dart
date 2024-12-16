@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:ecommerce_app/features/products/presentation/views/widgets/custom_product_item.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class CustomSearchDelegate extends SearchDelegate {
@@ -16,17 +17,26 @@ class CustomSearchDelegate extends SearchDelegate {
     return snapshot.docs.map((e) => ProductModel.fromFirestoreDoc(e)).toList();
   }
 
+  Future<void> requestMicrophonePermission() async {
+    var status = await Permission.microphone.request();
+    if (!status.isGranted) {
+      throw Exception('Microphone permission is required.');
+    }
+  }
+
   Future<void> startVoiceSearch(BuildContext context) async {
+    await requestMicrophonePermission();
+
     bool available = await speechToText.initialize();
     if (available) {
-      speechToText.listen(onResult: (result) {
-        query = result.recognizedWords;
-      });
+      speechToText.listen(
+        onResult: (result) {
+          query = result.recognizedWords;
+        },
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Voice recognition not available'),
-        ),
+        const SnackBar(content: Text('Voice recognition not available')),
       );
     }
   }

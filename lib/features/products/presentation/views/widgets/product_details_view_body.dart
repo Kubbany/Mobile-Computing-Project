@@ -66,6 +66,15 @@ class ProductDetailsViewBody extends StatelessWidget {
                 ),
                 CustomButton(
                   onPressed: () {
+                    if (item.stockQuantity == 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                              Text("No Enough Stock Quantity For This Item"),
+                        ),
+                      );
+                      return;
+                    }
                     ProductCartModel productCartModel = ProductCartModel(
                       productModel: item,
                     );

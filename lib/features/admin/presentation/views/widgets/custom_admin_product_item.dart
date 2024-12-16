@@ -15,6 +15,7 @@ class CustomAdminProductItem extends StatelessWidget {
   final ProductModel item;
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditProductCubit>();
     return GestureDetector(
       onDoubleTap: () {
         // Edit Logic
@@ -22,7 +23,7 @@ class CustomAdminProductItem extends StatelessWidget {
           isScrollControlled: true,
           context: context,
           builder: (_) => BlocProvider.value(
-            value: context.read<EditProductCubit>(),
+            value: cubit,
             child: EditProductButtomSheet(
               productItem: item,
             ),
@@ -34,7 +35,7 @@ class CustomAdminProductItem extends StatelessWidget {
           context: context,
           builder: (_) {
             return BlocProvider.value(
-              value: context.read<EditProductCubit>(),
+              value: cubit,
               child: DeleteProductAlert(id: item.id),
             );
           },

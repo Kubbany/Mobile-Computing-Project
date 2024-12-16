@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/features/admin/data/repos/products_repo.dart';
+import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_product_cubit/edit_product_cubit.dart';
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/custom_admin_product_item.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
+import 'package:ecommerce_app/utils/get_it_setup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class CustomAdminSearchDelegate extends SearchDelegate {
@@ -16,12 +18,36 @@ class CustomAdminSearchDelegate extends SearchDelegate {
     return snapshot.docs.map((e) => ProductModel.fromFirestoreDoc(e)).toList();
   }
 
+  Future<void> requestMicrophonePermission() async {
+    var status = await Permission.microphone.request();
+    if (!status.isGranted) {
+      throw Exception('Microphone permission is required.');
+    }
+  }
+
+  Future<void> startVoiceSearch(BuildContext context) async {
+    await requestMicrophonePermission();
+
+    bool available = await speechToText.initialize();
+    if (available) {
+      speechToText.listen(
+        onResult: (result) {
+          query = result.recognizedWords;
+        },
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Voice recognition not available')),
+      );
+    }
+  }
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
         onPressed: () {
-          log("Started");
+          startVoiceSearch(context);
         },
         icon: const Icon(
           Icons.mic_none,
@@ -57,37 +83,40 @@ class CustomAdminSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // Filter products based on query
-    return FutureBuilder<List<ProductModel>>(
-      future: fetchProducts(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No products found'));
-        } else {
-          final results = snapshot.data!
-              .where((product) => product.title
-                  .toString()
-                  .toLowerCase()
-                  .contains(query.toLowerCase()))
-              .toList();
+    return BlocProvider(
+      create: (context) => EditProductCubit(getIt<ProductsRepo>()),
+      child: FutureBuilder<List<ProductModel>>(
+        future: fetchProducts(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No products found'));
+          } else {
+            final results = snapshot.data!
+                .where((product) => product.title
+                    .toString()
+                    .toLowerCase()
+                    .contains(query.toLowerCase()))
+                .toList();
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-            ),
-            child: ListView.builder(
-              itemCount: results.length,
-              itemBuilder: (context, index) {
-                final product = results[index];
-                return CustomAdminProductItem(item: product);
-              },
-            ),
-          );
-        }
-      },
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
+              child: ListView.builder(
+                itemCount: results.length,
+                itemBuilder: (context, index) {
+                  final product = results[index];
+                  return CustomAdminProductItem(item: product);
+                },
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
