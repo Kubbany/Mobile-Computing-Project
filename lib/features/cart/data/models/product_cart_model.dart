@@ -9,7 +9,7 @@ class ProductCartModel {
 
   ProductCartModel({
     required this.productModel,
-    this.quantity = 0,
+    this.quantity = 1,
   });
 
   ProductCartModel copyWith({
