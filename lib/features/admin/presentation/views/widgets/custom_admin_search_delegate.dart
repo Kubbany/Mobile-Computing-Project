@@ -5,6 +5,7 @@ import 'package:ecommerce_app/features/admin/presentation/manager/cubits/edit_pr
 import 'package:ecommerce_app/features/admin/presentation/views/widgets/custom_admin_product_item.dart';
 import 'package:ecommerce_app/features/products/data/models/product_model.dart';
 import 'package:ecommerce_app/utils/get_it_setup.dart';
+import 'package:ecommerce_app/utils/scan_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -42,6 +43,22 @@ class CustomAdminSearchDelegate extends SearchDelegate {
     }
   }
 
+  void startCameraScan(BuildContext context) {
+    Navigator.of(context)
+        .push(
+      MaterialPageRoute(
+        builder: (context) => const ScanView(),
+      ),
+    )
+        .then(
+      (value) {
+        if (value != null) {
+          query = value;
+        }
+      },
+    );
+  }
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -55,7 +72,9 @@ class CustomAdminSearchDelegate extends SearchDelegate {
         ),
       ),
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          startCameraScan(context);
+        },
         icon: const Icon(
           Icons.camera_alt_outlined,
           size: 30,
@@ -96,10 +115,15 @@ class CustomAdminSearchDelegate extends SearchDelegate {
             return const Center(child: Text('No products found'));
           } else {
             final results = snapshot.data!
-                .where((product) => product.title
-                    .toString()
-                    .toLowerCase()
-                    .contains(query.toLowerCase()))
+                .where(
+                  (product) =>
+                      product.title.toString().toLowerCase().contains(
+                            query.toLowerCase(),
+                          ) ||
+                      product.barcode.toString().toLowerCase().contains(
+                            query.toLowerCase(),
+                          ),
+                )
                 .toList();
 
             return Padding(
